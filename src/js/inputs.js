@@ -28,9 +28,17 @@ class Inputs {
         if(e.keyCode === 219) {
             theCanvas.ctx.lineWidth--;
             this.capWidth.value = theCanvas.ctx.lineWidth;
+            const capDisplay = document.querySelector("#capWidth-display");
+            capDisplay.style.width = `${theCanvas.ctx.lineWidth}px`;
+            capDisplay.style.height = `${theCanvas.ctx.lineWidth}px`;
+            capDisplay.style.backgroundColor = theCanvas.ctx.strokeStyle;
         } else if (e.keyCode === 221) {
             theCanvas.ctx.lineWidth++;
             this.capWidth.value = theCanvas.ctx.lineWidth;
+            const capDisplay = document.querySelector("#capWidth-display");
+            capDisplay.style.width = `${theCanvas.ctx.lineWidth}px`;
+            capDisplay.style.height = `${theCanvas.ctx.lineWidth}px`;
+            capDisplay.style.backgroundColor = theCanvas.ctx.strokeStyle;
         }
 
         ui.displayChanges("capSize");
@@ -53,6 +61,10 @@ inputs.capWidth.addEventListener("click", e => {
     ui.displayChanges("capSize");
 });
 document.addEventListener("keydown", inputs.changeCapSize.bind(inputs));
+document.addEventListener("keyup", () => {
+    document.querySelector("#capWidth-display").style.width = "0px";
+    document.querySelector("#capWidth-display").style.height = "0px";
+});
 
 // Choose colors for drawing and for the background fill
 inputs.colorInputs.forEach(input => input.addEventListener("change", () => {
